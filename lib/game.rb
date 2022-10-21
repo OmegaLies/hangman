@@ -33,13 +33,7 @@ class Game
   # массиве на соответствующем месте находится nil. Этот массив нужен методу
   # экземпляра класса ConsoleInterface для вывода слова на игровом табло.
   def letters_to_guess
-    @letters.map do |letter|
-      if @user_guesses.include?(normalize_letter(letter))
-        letter
-      else
-        nil
-      end
-    end
+    @letters.map { |letter| letter if @user_guesses.include?(normalize_letter(letter)) }
   end
 
   # Возвращает true, если у пользователя не осталось ошибок, т.е. игра проиграна
@@ -75,10 +69,8 @@ class Game
 
   def normalize_letter(letter)
     case letter
-    when "Ё"
-      "Е"
-    when "Й"
-      "И"
+    when 'Ё' then 'Е'
+    when 'Й' then 'И'
     else
       letter
     end
